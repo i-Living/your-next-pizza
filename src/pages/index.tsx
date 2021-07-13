@@ -1,56 +1,54 @@
 import {
-  Link as ChakraLink,
-  Text,
-  Code,
-  List,
-  ListIcon,
-  ListItem,
+  Box,
+  Flex
 } from '@chakra-ui/react'
-import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
 
-import { Hero } from '../components/Hero'
-import { Container } from '../components/Container'
-import { Main } from '../components/Main'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
-import { Footer } from '../components/Footer'
+import { Container } from 'components/Container'
+import { Footer } from 'components/Footer'
+import { PizzaList } from 'components/PizzaList'
+import { createClient } from 'contentful'
+import { IPizzaItem } from 'interfaces'
+import { GetStaticProps } from 'next'
+import Logo from '_assets/nextLogo'
 
-const Index = () => (
-  <Container height="100vh">
-    <Hero />
-    <Main>
-      <Text>
-        Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code> +{' '}
-        <Code>typescript</Code>.
-      </Text>
+interface IndexProps {
+  pizzaList: [IPizzaItem]
+}
 
-      <List spacing={3} my={0}>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink
-            isExternal
-            href="https://chakra-ui.com"
-            flexGrow={1}
-            mr={2}
-          >
-            Chakra UI <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink isExternal href="https://nextjs.org" flexGrow={1} mr={2}>
-            Next.js <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-      </List>
-    </Main>
+export const getStaticProps: GetStaticProps = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  })
 
-    <DarkModeSwitch />
-    <Footer>
-      <Text>Next ❤️ Chakra</Text>
-    </Footer>
-    <CTA />
-  </Container>
-)
+  const res = await client.getEntries({ content_type: "pizza" })
+
+  return {
+    props: {
+      pizzaList: res.items,
+    }
+  }
+}
+
+const Index: React.FC<IndexProps> = ({ pizzaList }) => {
+  return (
+    <Container>
+      <Flex
+        backgroundColor='orange.100'
+        fontSize="6xl"
+        fontFamily="sans-serif"
+        w="100%"
+        alignItems="center"
+        justifyContent="center"
+        padding={2}
+      >
+        Your <Box ml={30} mr={30}><Logo /></Box> Pizza
+      </Flex>
+      <PizzaList list={pizzaList} />
+      <Footer />
+    </Container >
+  )
+}
+
 
 export default Index

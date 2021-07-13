@@ -1,5 +1,5 @@
 {
-  "name": "with-chakra-ui-typescript",
+  "name": "your-next-pizza",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -12,6 +12,7 @@
     "@chakra-ui/theme-tools": "1.1.2",
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",
+    "contentful": "^8.4.2",
     "framer-motion": "^4.0.3",
     "next": "latest",
     "react": "^17.0.2",
