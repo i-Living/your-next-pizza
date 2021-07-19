@@ -1,7 +1,8 @@
 import { Box, RadioProps, useRadio } from '@chakra-ui/react'
 import React from 'react'
 
-export const RadioCard: React.FC<RadioProps> = (props) => {
+export const RadioCard: React.FC<RadioProps> = React.memo((props) => {
+
   const { getInputProps, getCheckboxProps } = useRadio(props)
 
   const input = getInputProps()
@@ -39,4 +40,4 @@ export const RadioCard: React.FC<RadioProps> = (props) => {
       </Box>
     </Box>
   )
-}
+})

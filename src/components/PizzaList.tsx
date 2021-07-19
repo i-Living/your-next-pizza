@@ -1,3 +1,4 @@
+import React from 'react'
 import { Flex } from '@chakra-ui/react'
 import PizzaCard from './PizzaCard'
 import { IPizzaItem } from 'interfaces'
@@ -7,9 +8,7 @@ interface PizzaListProps {
   list: [IPizzaItem]
 }
 
-export const PizzaList: React.FC<PizzaListProps> = ({ list }) => {
-  console.log('PizzaList')
-
+export const PizzaList: React.FC<PizzaListProps> = React.memo(({ list }) => {
   return (
     <Flex
       direction="row"
@@ -24,4 +23,4 @@ export const PizzaList: React.FC<PizzaListProps> = ({ list }) => {
       )}
     </Flex>
   )
-}
+})

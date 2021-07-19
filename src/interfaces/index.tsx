@@ -6,6 +6,22 @@ export interface IPizzaItem {
   fields: {
     name: string,
     description: string,
-    image: any
+    image: any,
+    sizes: [],
+    priceSmall: number,
+    priceMedium: number,
+    priceBig: number
   }
+}
+
+export interface PizzaState {
+  id: string,
+  name: string;
+  size: string,
+  price: number;
+  amount: number
+}
+
+export interface OrderState {
+  pizza: Array<PizzaState>
 }

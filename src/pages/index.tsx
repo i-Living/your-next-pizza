@@ -2,6 +2,7 @@ import {
   Box,
   Flex
 } from '@chakra-ui/react'
+import { CartMenu } from 'components/CartMenu'
 
 import { Container } from 'components/Container'
 import { Footer } from 'components/Footer'
@@ -21,7 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   })
 
-  const res = await client.getEntries({ content_type: "pizza" })
+  const res = await client.getEntries({ content_type: 'pizza' })
 
   return {
     props: {
@@ -35,14 +36,21 @@ const Index: React.FC<IndexProps> = ({ pizzaList }) => {
     <Container>
       <Flex
         backgroundColor='orange.100'
-        fontSize="6xl"
-        fontFamily="sans-serif"
-        w="100%"
-        alignItems="center"
-        justifyContent="center"
-        padding={2}
+        w='100%'
+        justifyContent='space-between'
+        alignItems='center'
       >
-        Your <Box ml={30} mr={30}><Logo /></Box> Pizza
+        <Box w='12rem' ml={10}/>
+        <Flex
+          fontSize='6xl'
+          fontFamily='sans-serif'
+          alignItems='center'
+          justifyContent='center'
+          padding={2}
+        >
+          Your <Box ml={30} mr={30}><Logo /></Box> Pizza
+        </Flex>
+        <Box mr={10} w='12rem'><CartMenu /></Box>
       </Flex>
       <PizzaList list={pizzaList} />
       <Footer />

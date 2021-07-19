@@ -1,12 +1,19 @@
+import { Provider as ReduxProvider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import { AppProps } from 'next/app'
+import { useStore } from 'store/configureStore'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const store = useStore(pageProps.initialReduxState)
+  console.log('store: ', store.getState())
+
   return (
-    <ChakraProvider resetCSS>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <ReduxProvider store={store}>
+      <ChakraProvider resetCSS>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </ReduxProvider>
   )
 }
 
