@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      pizzaList: res?.items,
+      pizzaList: res?.items || [],
     }
   }
 }
