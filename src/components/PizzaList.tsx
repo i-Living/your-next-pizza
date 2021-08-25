@@ -18,7 +18,7 @@ export const PizzaList: React.FC<PizzaListProps> = React.memo(({ list }) => {
       maxW="1400px"
       m="0 auto"
     >
-      {list.map(item =>
+      {list?.map(item =>
         <PizzaCard key={item.sys.id} pizza={item} />
       )}
     </Flex>
