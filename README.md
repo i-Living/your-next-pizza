@@ -6,3 +6,5 @@
 - Redux
 - Contenful (data storage)
 - Chakra-ui
+
+### Check it out: https://your-next-pizza.vercel.app/
